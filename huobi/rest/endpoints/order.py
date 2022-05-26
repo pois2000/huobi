@@ -75,7 +75,7 @@ class HuobiRestClientOrder(HuobiRestClientBase):
         }
     )
 
-    status = Endpoint(
+    order_detail = Endpoint(
         method='GET',
         path='/v1/order/orders/{order-id}',
         auth_required=True,
@@ -87,9 +87,9 @@ class HuobiRestClientOrder(HuobiRestClientBase):
         }
     )
 
-    matchresults = Endpoint(
+    order_id = Endpoint(
         method='GET',
-        path='/v1/order/orders/{order-id}',
+        path='/v1/order/orders/{order-id}/matchresults',
         auth_required=True,
         params={
             'order_id': {
@@ -99,7 +99,18 @@ class HuobiRestClientOrder(HuobiRestClientBase):
         }
     )
 
-    orders = list_orders = Endpoint(
+    client_order = Endpoint(
+        method='GET',
+        path='/v1/order/orders/getClientOrder',
+        auth_required=True,
+        params={
+            'clientOrderId': {
+                'required': True,
+            }
+        }
+    )
+
+    order_state = Endpoint(
         method='GET',
         path='/v1/order/orders',
         auth_required=True,
@@ -115,25 +126,34 @@ class HuobiRestClientOrder(HuobiRestClientBase):
                     'sell-market',
                     'buy-limit',
                     'sell-limit',
+                    'buy-ioc', 
+                    'sell-ioc', 
+                    'buy-stop-limit', 
+                    'sell-stop-limit', 
+                    'buy-limit-fok', 
+                    'sell-limit-fok', 
+                    'buy-stop-limit-fok', 
+                    'sell-stop-limit-fok',
                 ]
             },
-            'start_date': {
+            'start_time': {
                 'required': False,
-                'formatter': date_formatter
+                'name': 'start-time',
             },
-            'end_date': {
+            'end_time': {
                 'required': False,
-                'formatter': date_formatter
+                'name': 'end-time',
             },
             'states': {
                 'required': True,
                 'choices': [
-                    'pre-submitted',
-                    'submitted',
-                    'partial-filled',
-                    'partial-canceled',
-                    'filled',
+                    'filled', 
+                    'partial-canceled', 
                     'canceled',
+                    'filled,partial-canceled,canceled',
+                    'filled,canceled',
+                    'partial-canceled,canceled',
+                    'filled,partial-canceled',
                 ]
             },
             'from': {
@@ -152,7 +172,40 @@ class HuobiRestClientOrder(HuobiRestClientBase):
         }
     )
 
-    list_matchresults = Endpoint(
+    open_order = Endpoint(
+        method='GET',
+        path='/v1/order/openOrders',
+        auth_required=True,
+        params={
+            'account_id': {
+                'required': False,
+                'name': 'account-id',
+            },
+            'symbol': {
+                'required': False,
+            },
+            'side': {
+                'required': False,
+                'choices': [
+                    'buy', 'sell'
+                ]
+            },
+            'from': {
+                'required': False,
+            },
+            'direct': {
+                'required': False,
+                'choices': [
+                    'prev',
+                    'next'
+                ]
+            },
+            'size': {
+                'required': False,
+            }
+        }
+    )
+    order_symbol = Endpoint(
         method='GET',
         path='/v1/order/matchresults',
         auth_required=True,
@@ -170,15 +223,19 @@ class HuobiRestClientOrder(HuobiRestClientBase):
                     'sell-limit',
                     'buy-ioc',
                     'sell-ioc',
+                    'buy-limit-maker', 
+                    'sell-limit-maker', 
+                    'buy-stop-limit', 
+                    'sell-stop-limit',
                 ]
             },
-            'start_date': {
+            'start_time': {
                 'required': False,
-                'formatter': date_formatter
+                'name': 'start-time',
             },
-            'end_date': {
+            'end_time': {
                 'required': False,
-                'formatter': date_formatter
+                'name': 'end-time',
             },
             'from': {
                 'required': False,
