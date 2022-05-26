@@ -216,6 +216,7 @@ class HuobiRestClientAccounts(HuobiRestClientBase):
             },
             'limit': {
                 'required': False,
+                'default': 100,
             },
             'from_id': {
                 'required': False,
