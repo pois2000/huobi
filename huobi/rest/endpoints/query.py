@@ -12,7 +12,7 @@ class HuobiRestClientQuery(HuobiRestClientBase):
             'currency': {
                 'required': True
             },
-        }
+        },
     )
     
     withdraw_quota = Endpoint(
@@ -23,7 +23,7 @@ class HuobiRestClientQuery(HuobiRestClientBase):
             'currency': {
                 'required': True
             },
-        }
+        },
     )
     
     withdraw_address = Endpoint(
@@ -32,9 +32,9 @@ class HuobiRestClientQuery(HuobiRestClientBase):
         auth_required=True,        
         params={
             'currency': {
-                'required': True
+                'required': True,
             },
-        }
+        },
     )
     
     withdraw_request = Endpoint(
@@ -43,19 +43,19 @@ class HuobiRestClientQuery(HuobiRestClientBase):
         auth_required=True,
         params={
             'address': {
-                'required': True
+                'required': True,
             },
             'currency': {
-                'required': True
+                'required': True,
             },
             'amount': {
-                'required': True
+                'required': True,
             },
             'fee': {
-                'required': True
+                'required': True,
             },
             'chain': {
-                'required': False
+                'required': False,
             },
             'addr_tag': {
                 'required': False,
@@ -65,7 +65,7 @@ class HuobiRestClientQuery(HuobiRestClientBase):
                 'required': False,
                 'name': 'client-order-id',
             },
-        }
+        },
     )
     
     withdraw_cancel = Endpoint(
@@ -75,9 +75,9 @@ class HuobiRestClientQuery(HuobiRestClientBase):
         params={
             'withdraw_id': {
                 'required': True,
-                'url': 'withdraw-id'
-            }
-        }
+                'url': 'withdraw-id',
+            },
+        },
     )
     
     deposit_withdraw = Endpoint(
@@ -86,11 +86,11 @@ class HuobiRestClientQuery(HuobiRestClientBase):
         auth_required=True,
         params={
             'currency': {
-                'required': False
+                'required': False,
             },
             'type': {
                 'required': True,
-                'choices': ['deposit', 'withdraw']
+                'choices': ['deposit', 'withdraw'],
             },
             'from': {
                 'required': False,
@@ -99,10 +99,10 @@ class HuobiRestClientQuery(HuobiRestClientBase):
             'size': {
                 'required': False,
                 'default': 100,
-            }
+            },
             'direct': {
                 'required': False,
-                'choices': ['prev', 'next']
+                'choices': ['prev', 'next'],
             },
-        }
+        },
     )
