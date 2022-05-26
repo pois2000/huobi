@@ -38,11 +38,9 @@ class HuobiRestClientAccounts(HuobiRestClientBase):
             },
             'valuationCurrency': {
                 'required': False,
-                'choices': [
-                    'BTC',
-                ]
+                'choices': ['BTC'],
             },
-        }
+        },
     )
     
     asset_valuation = Endpoint(
@@ -57,7 +55,7 @@ class HuobiRestClientAccounts(HuobiRestClientBase):
                     'margin', 
                     'otc', 
                     'super-margin',
-                ]
+                ],
             },
             'valuationCurrency': {
                 'required': False,
@@ -78,12 +76,12 @@ class HuobiRestClientAccounts(HuobiRestClientBase):
                     'SGD', 
                     'AED', 
                     'SAR',
-                ]
+                ],
             },
             'subUid': {
                 'required': False,
             },
-        }
+        },
     )
     
     transfer = Endpoint(
