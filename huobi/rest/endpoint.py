@@ -113,7 +113,7 @@ class Endpoint(object):
         except Exception as exc:
             raise HuobiRestApiDecodeError('Json decode error') from exc
 
-        if not json_data.get('status') == 'ok':
+        if res.status_code!=200 :
             error_code = json_data.get('err-code', 'Unknown error code')
             error_msg = json_data.get('err-msg', 'Unknown error message')
             raise HuobiRestiApiError(
