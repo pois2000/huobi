@@ -24,16 +24,7 @@ class HuobiRestClientOrder(HuobiRestClientBase):
         params={
             'account_id': {
                 'required': True,
-                'name': 'account-id'
-            },
-            'amount': {
-                'required': True,
-            },
-            'price': {
-                'required': False,
-            },
-            'source': {
-                'required': False,
+                'name': 'account-id',
             },
             'symbol': {
                 'required': True
@@ -45,34 +36,76 @@ class HuobiRestClientOrder(HuobiRestClientBase):
                     'sell-market',
                     'buy-limit',
                     'sell-limit',
-                ]
+                    'buy-ioc', 
+                    'sell-ioc', 
+                    'buy-limit-maker', 
+                    'sell-limit-maker', 
+                    'buy-stop-limit', 
+                    'sell-stop-limit', 
+                    'buy-limit-fok', 
+                    'sell-limit-fok', 
+                    'buy-stop-limit-fok', 
+                    'sell-stop-limit-fok',
+                ],
+            },
+            'amount': {
+                'required': True,
+            },
+            'price': {
+                'required': False,
+            },
+            'source': {
+                'required': False,
+                 'choices': [
+                    'spot-api', 
+                    'margin-api',
+                    'super-margin-api',
+                    'c2c-margin-api',
+                 ],
+            },
+            'client_order_id': {
+                'required': False,
+                'name': 'client-order-id',
+            },
+            'self_match_prevent': {
+                'required': False,
+                'name': 'self-match-prevent',
+            },
+            'operator': {
+                'required': False,
+                 'choices': [
+                    'gte', 
+                    'lte',
+                 ],
             },
         }
     )
 
-    submit_cancel = Endpoint(
+
+    order_cancel = Endpoint(
         method='POST',
         path='/v1/order/orders/{order-id}/submitcancel',
         auth_required=True,
         params={
             'order_id': {
                 'required': True,
-                'url': 'order-id'
-            }
-        }
+                'url': 'order-id',
+            },
+            'symbol': {
+                'required': False,
+            },
+        },
     )
 
-    batch_cancel = Endpoint(
+    cancel_all_after = Endpoint(
         method='POST',
-        path='/v1/order/orders/batchcancel',
+        path='/v2/algo-orders/cancel-all-after',
         auth_required=True,
         params={
-            'order_ids': {
+            'timeout': {
                 'required': True,
-                'name': 'order-ids',
-                'type': list
-            }
-        }
+            },
+        },
     )
 
     order_detail = Endpoint(
@@ -82,9 +115,9 @@ class HuobiRestClientOrder(HuobiRestClientBase):
         params={
             'order_id': {
                 'required': True,
-                'url': 'order-id'
-            }
-        }
+                'url': 'order-id',
+            },
+        },
     )
 
     order_id = Endpoint(
@@ -94,23 +127,23 @@ class HuobiRestClientOrder(HuobiRestClientBase):
         params={
             'order_id': {
                 'required': True,
-                'url': 'order-id'
-            }
-        }
+                'url': 'order-id',
+            },
+        },
     )
 
-    client_order = Endpoint(
+    order_client = Endpoint(
         method='GET',
         path='/v1/order/orders/getClientOrder',
         auth_required=True,
         params={
             'clientOrderId': {
                 'required': True,
-            }
-        }
+            },
+        },
     )
 
-    order_state = Endpoint(
+    order_history = Endpoint(
         method='GET',
         path='/v1/order/orders',
         auth_required=True,
@@ -134,7 +167,7 @@ class HuobiRestClientOrder(HuobiRestClientBase):
                     'sell-limit-fok', 
                     'buy-stop-limit-fok', 
                     'sell-stop-limit-fok',
-                ]
+                ],
             },
             'start_time': {
                 'required': False,
@@ -146,15 +179,12 @@ class HuobiRestClientOrder(HuobiRestClientBase):
             },
             'states': {
                 'required': True,
+                'multiple': True,
                 'choices': [
                     'filled', 
                     'partial-canceled', 
                     'canceled',
-                    'filled,partial-canceled,canceled',
-                    'filled,canceled',
-                    'partial-canceled,canceled',
-                    'filled,partial-canceled',
-                ]
+                ],
             },
             'from': {
                 'required': False,
@@ -164,15 +194,15 @@ class HuobiRestClientOrder(HuobiRestClientBase):
                 'choices': [
                     'prev',
                     'next'
-                ]
+                ],
             },
             'size': {
                 'required': False,
-            }
-        }
+            },
+        },
     )
 
-    open_order = Endpoint(
+    order_open = Endpoint(
         method='GET',
         path='/v1/order/openOrders',
         auth_required=True,
@@ -188,23 +218,21 @@ class HuobiRestClientOrder(HuobiRestClientBase):
                 'required': False,
                 'choices': [
                     'buy', 'sell'
-                ]
+                ],
             },
             'from': {
                 'required': False,
             },
             'direct': {
                 'required': False,
-                'choices': [
-                    'prev',
-                    'next'
-                ]
+                'choices': ['prev','next']
             },
             'size': {
                 'required': False,
-            }
-        }
+            },
+        },
     )
+    
     order_symbol = Endpoint(
         method='GET',
         path='/v1/order/matchresults',
@@ -227,7 +255,7 @@ class HuobiRestClientOrder(HuobiRestClientBase):
                     'sell-limit-maker', 
                     'buy-stop-limit', 
                     'sell-stop-limit',
-                ]
+                ],
             },
             'start_time': {
                 'required': False,
@@ -244,11 +272,11 @@ class HuobiRestClientOrder(HuobiRestClientBase):
                 'required': False,
                 'choices': [
                     'prev',
-                    'next'
-                ]
+                    'next',
+                ],
             },
             'size': {
                 'required': False,
-            }
+            },
         }
     )
