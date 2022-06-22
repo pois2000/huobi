@@ -3,7 +3,7 @@ from huobi.rest.endpoints import HuobiRestClientBase
 from huobi.rest.endpoint import Endpoint
 
 
-class HuobiRestClientQuery(HuobiRestClientBase): 
+class HuobiRestClientQuery(HuobiRestClientBase):
     deposit_address = Endpoint(
         method='GET',
         path='/v2/account/deposit/address',
@@ -14,29 +14,29 @@ class HuobiRestClientQuery(HuobiRestClientBase):
             },
         },
     )
-    
+
     withdraw_quota = Endpoint(
         method='GET',
         path='/v2/account/withdraw/quota',
-        auth_required=True,        
+        auth_required=True,
         params={
             'currency': {
                 'required': True
             },
         },
     )
-    
+
     withdraw_address = Endpoint(
         method='GET',
         path='/v2/account/withdraw/address',
-        auth_required=True,        
+        auth_required=True,
         params={
             'currency': {
                 'required': True,
             },
         },
     )
-    
+
     withdraw_request = Endpoint(
         method='POST',
         path='/v1/dw/withdraw/api/create',
@@ -67,7 +67,7 @@ class HuobiRestClientQuery(HuobiRestClientBase):
             },
         },
     )
-    
+
     withdraw_cancel = Endpoint(
         method='POST',
         path='/v1/dw/withdraw-virtual/{withdraw-id}/cancel',
@@ -79,7 +79,7 @@ class HuobiRestClientQuery(HuobiRestClientBase):
             },
         },
     )
-    
+
     deposit_withdraw = Endpoint(
         method='GET',
         path='/v1/query/deposit-withdraw',

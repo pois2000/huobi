@@ -42,7 +42,7 @@ class HuobiRestClientAccounts(HuobiRestClientBase):
             },
         },
     )
-    
+
     asset_valuation = Endpoint(
         method='GET',
         path='/v2/account/asset-valuation',
@@ -51,30 +51,30 @@ class HuobiRestClientAccounts(HuobiRestClientBase):
             'accountType': {
                 'required': True,
                 'choices': [
-       	            'spot', 
-                    'margin', 
-                    'otc', 
+       	            'spot',
+                    'margin',
+                    'otc',
                     'super-margin',
                 ],
             },
             'valuationCurrency': {
                 'required': False,
                 'choices': [
-                    'BTC', 
-                    'CNY', 
-                    'USD', 
-                    'JPY', 
-                    'KRW', 
-                    'GBP', 
-                    'TRY', 
-                    'EUR', 
-                    'RUB', 
-                    'VND', 
-                    'HKD', 
-                    'TWD', 
-                    'MYR', 
-                    'SGD', 
-                    'AED', 
+                    'BTC',
+                    'CNY',
+                    'USD',
+                    'JPY',
+                    'KRW',
+                    'GBP',
+                    'TRY',
+                    'EUR',
+                    'RUB',
+                    'VND',
+                    'HKD',
+                    'TWD',
+                    'MYR',
+                    'SGD',
+                    'AED',
                     'SAR',
                 ],
             },
@@ -83,7 +83,7 @@ class HuobiRestClientAccounts(HuobiRestClientBase):
             },
         },
     )
-    
+
     transfer = Endpoint(
         method='POST',
         path='/v1/account/transfer',
@@ -97,7 +97,7 @@ class HuobiRestClientAccounts(HuobiRestClientBase):
                 'required': False,
                 'name': 'from-account-type',
                 'choices': [
-                    'spot', 
+                    'spot',
                     'margin',
                 ]
             },
@@ -113,7 +113,7 @@ class HuobiRestClientAccounts(HuobiRestClientBase):
                 'required': False,
                 'name': 'to-account-type',
                 'choices': [
-                    'spot', 
+                    'spot',
                     'margin',
                 ]
             },
@@ -148,18 +148,18 @@ class HuobiRestClientAccounts(HuobiRestClientBase):
                 'multiple': True,
                 'choices': [
                     'trade',
-                    'etf', 
-                    'transact-fee', 
-                    'fee-deduction', 
-                    'transfer', 
-                    'credit', 
-                    'liquidation', 
-                    'interest', 
-                    'deposit', 
-                    'withdraw', 
-                    'withdraw-fee', 
-                    'exchange', 
-                    'other-types', 
+                    'etf',
+                    'transact-fee',
+                    'fee-deduction',
+                    'transfer',
+                    'credit',
+                    'liquidation',
+                    'interest',
+                    'deposit',
+                    'withdraw',
+                    'withdraw-fee',
+                    'exchange',
+                    'other-types',
                     'rebate',
                 ]
             },
@@ -174,8 +174,8 @@ class HuobiRestClientAccounts(HuobiRestClientBase):
             'sort': {
                 'required': False,
                 'choices': [
-                    'asc', 
-                    'desc', 
+                    'asc',
+                    'desc',
                 ]
             },
             'from_id': {
@@ -184,7 +184,7 @@ class HuobiRestClientAccounts(HuobiRestClientBase):
             },
         }
     )
-    
+
     account_ledger = Endpoint(
         method='GET',
         path='/v2/account/ledger',
@@ -192,7 +192,7 @@ class HuobiRestClientAccounts(HuobiRestClientBase):
         params={
             'account_id': {
                 'required': True,
-                'name': 'account-id',
+                'name': 'accountId',
             },
             'currency': {
                 'required': False,
@@ -208,8 +208,8 @@ class HuobiRestClientAccounts(HuobiRestClientBase):
             'sort': {
                 'required': False,
                 'choices': [
-                    'asc', 
-                    'desc', 
+                    'asc',
+                    'desc',
                 ]
             },
             'limit': {
@@ -221,4 +221,15 @@ class HuobiRestClientAccounts(HuobiRestClientBase):
                 'name': 'from-id',
             },
         }
+    )
+
+    fee_rate = Endpoint(
+        method='GET',
+        path='/v2/reference/transact-fee-rate',
+        auth_required=True,
+        params={
+            'symbols': {
+                'required': True,
+            },
+        },
     )
